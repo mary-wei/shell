@@ -47,4 +47,25 @@ unzip -q rawdata.zip
 
 ###########################################
 
+DIR="data"
+
+mkdir -p "$DIR"
+
+mv rawdata "$DIR/raw"
+
+ls "$DIR/raw"
+
+mkdir -p "$DIR/processed/server_logs"
+mkdir -p "$DIR/processed/user_logs"
+mkdir -p "$DIR/processed/event_logs"
+
+cp "$DIR/raw/"*server*.log "$DIR/processed/server_logs/"
+cp "$DIR/raw/"*user*.log "$DIR/processed/user_logs/" 
+cp "$DIR/raw/"*event*.log "$DIR/processed/event_logs/"
+
+rm "$DIR/raw/"*ipaddr*
+rm "$DIR/processed/user_logs/"*ipaddr*
+
+find "$DIR/processed" -type f > "$DIR/inventory.txt"
+
 echo "Project setup is complete!"
